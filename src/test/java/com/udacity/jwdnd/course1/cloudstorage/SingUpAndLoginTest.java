@@ -12,7 +12,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SingupAndLoginUsersTests {
+public class SingUpAndLoginTest {
 
     @LocalServerPort
     private Integer port;
@@ -56,8 +56,7 @@ public class SingupAndLoginUsersTests {
 
     @Test
     public void  testUserSignupAndLogin() {
-        try
-        {
+        try {
             String username = "pzastoup";
             String password = "whatabadpassword";
 

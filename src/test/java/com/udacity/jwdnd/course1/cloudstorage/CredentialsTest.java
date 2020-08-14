@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CredentialsTests {
+public class CredentialsTest {
     private static ChromeDriver driver;
     public String baseURL;
     @LocalServerPort

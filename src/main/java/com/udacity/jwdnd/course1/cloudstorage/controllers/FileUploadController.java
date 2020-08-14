@@ -38,7 +38,10 @@ public class FileUploadController {
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("fileUpload") MultipartFile file,Model model) {
         User user = userService.getUser();
-        if(filesService.isFileAlreadyExists(file.getOriginalFilename(),user.getUserId())){
+        if(StringUtils.isEmpty(file.getOriginalFilename())){
+            model.addAttribute("dataMessage",
+                    "No file Selected !");
+        } else if(filesService.isFileAlreadyExists(file.getOriginalFilename(),user.getUserId())){
             model.addAttribute("dataMessage",
                     "File Already Exists with the same name " + file.getOriginalFilename() + "!");
         } else {

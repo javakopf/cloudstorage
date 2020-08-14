@@ -12,7 +12,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class NotesTesting {
+public class NotesTest {
     private static ChromeDriver driver;
     public String baseURL;
     @LocalServerPort
