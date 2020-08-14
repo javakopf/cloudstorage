@@ -24,15 +24,6 @@ public interface NoteMapper {
     List<Note> loadAllNotes(Integer userId);
 
 
-    @Select("SELECT * FROM NOTES WHERE userid = #{userId} and notetitle= #{noteTitle}")
-    @Results(value = {
-            @Result(property = "noteId", column = "noteid"),
-            @Result(property = "noteTitle", column = "notetitle"),
-            @Result(property = "noteDescription", column = "notedescription"),
-            @Result(property = "userId", column = "userid")
-    })
-    Note loadNoteByName(Integer userId, String noteTitle);
-
     @Select("SELECT * FROM NOTES WHERE noteid = #{noteId} ")
     @Results(value = {
             @Result(property = "noteId", column = "noteid"),
@@ -46,6 +37,6 @@ public interface NoteMapper {
     int deleteNote(Integer noteId, Integer userId);
 
     @Update("UPDATE NOTES SET notetitle = #{noteTitle} ,notedescription = #{noteDescription} WHERE noteid = #{noteId}")
-    int updateNote(Note note);
+    void updateNote(Note note);
 
 }

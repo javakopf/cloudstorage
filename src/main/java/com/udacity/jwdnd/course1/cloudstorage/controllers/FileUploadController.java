@@ -3,10 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controllers;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
-import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -20,20 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Controller
 public class FileUploadController {
 
-    private Logger logger = LoggerFactory.getLogger(FileUploadController.class);
-    private FilesService filesService ;
-    private UserService userService;
-    private HomeService homeService;
+    private final FilesService filesService ;
+    private final UserService userService;
 
-    public FileUploadController(FilesService filesService, UserService userService, HomeService homeService){
+    public FileUploadController(FilesService filesService, UserService userService){
         this.filesService = filesService;
         this.userService = userService;
-        this.homeService = homeService;
     }
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("fileUpload") MultipartFile file,Model model) {
@@ -84,7 +76,7 @@ public class FileUploadController {
 
 
     @GetMapping("/result")
-    public String getHomePage(Model model) throws IOException {
+    public String getHomePage(Model model){
         return "result";
     }
 

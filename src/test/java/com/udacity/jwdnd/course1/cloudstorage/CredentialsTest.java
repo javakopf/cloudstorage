@@ -104,6 +104,7 @@ public class CredentialsTest {
         credentialsTab.deleteCredentials();
         driver.get(baseURL + "/home");
         credentialsTab.goToCredentialsTab();
+        Thread.sleep(2000);
         Assertions.assertThrows(NoSuchElementException.class, () -> {
             driver.findElementById("delete-credential1");
         });

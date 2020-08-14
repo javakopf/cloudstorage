@@ -2,12 +2,9 @@ package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialsMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
-import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.EncryptionService;
 import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +17,6 @@ import java.util.Base64;
 
 @Controller
 public class CredentialsController {
-    private Logger logger = LoggerFactory.getLogger(CredentialsController.class);
 
     private final UserService userService;
     private final CredentialsMapper credentialsMapper;
@@ -41,7 +37,6 @@ public class CredentialsController {
     }
     @GetMapping("/deleteCredentials")
     public String handleDeleteCredentials(@RequestParam(value = "credentialId", required = true) Integer credentialId,Model model) {
-        User user = userService.getUser();
         int result = credentialsMapper.deleteCredentials(credentialId);
         if(result == 1){
             model.addAttribute("successMessage",
@@ -54,7 +49,7 @@ public class CredentialsController {
       }
         @PostMapping("/saveCredentials")
         public String handleSaveCredentials(@ModelAttribute("credentialsForm")Credentials credentialsForm ,Model model) {
-            int result = -1;
+            int result;
             Integer userId = userService.getUser().getUserId();
             Credentials credentials = credentialsMapper.loadCredentialsById(credentialsForm.getCredentialId());
             if(credentials == null)
@@ -91,7 +86,6 @@ public class CredentialsController {
 
     @GetMapping("/viewCredentials")
     public String handleViewCredentials(@ModelAttribute("credentialId")Integer credentialId,Model model) {
-        Integer userId = userService.getUser().getUserId();
         Credentials credentials = credentialsMapper.loadCredentialsById(credentialId);
         String decryptKey = credentials.getKey();
         String decryptedPassword = encryptionService.decryptValue(credentials.getPassword(),decryptKey);

@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/home")
@@ -22,7 +21,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHomePage(Model model) throws IOException {
+    public String getHomePage(Model model){
         User user = userService.getUser();
         if(user == null){
             return "login";

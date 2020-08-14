@@ -12,8 +12,8 @@ import java.util.List;
 
 @Service
 public class FilesService {
-    private FileMapper fileMapper;
-    private Logger logger = LoggerFactory.getLogger(FilesService.class);
+    private final FileMapper fileMapper;
+    private final Logger logger = LoggerFactory.getLogger(FilesService.class);
 
     public FilesService(FileMapper fileMapper){
         this.fileMapper = fileMapper;
@@ -28,9 +28,6 @@ public class FilesService {
         return -1;
    }
 
-    public List<File> loadAllFilesForUser(Integer userId) {
-            return fileMapper.loadFilesForUser(userId);
-    }
 
     public File loadFile(String fileName,Integer userId) {
         return fileMapper.getFileForUserByName(userId,fileName);
