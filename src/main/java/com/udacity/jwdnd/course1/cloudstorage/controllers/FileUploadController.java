@@ -37,9 +37,6 @@ public class FileUploadController {
     }
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("fileUpload") MultipartFile file,Model model) {
-        if(StringUtils.isEmpty(file.getOriginalFilename())){
-            return "home";
-        }
         User user = userService.getUser();
         if(filesService.isFileAlreadyExists(file.getOriginalFilename(),user.getUserId())){
             model.addAttribute("dataMessage",

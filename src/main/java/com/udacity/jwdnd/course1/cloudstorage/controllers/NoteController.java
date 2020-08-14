@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.NoteMapper;
-import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.HomeService;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class NoteController {
@@ -60,15 +57,15 @@ public class NoteController {
 
 
     @GetMapping("/deleteNote")
-    public String handleDeleteNote(@RequestParam(value = "noteTitle", required = true) String noteTitle,Model model) {
+    public String handleDeleteNote(@RequestParam(value = "noteId", required = true) Integer noteId,Model model) {
         User user = userService.getUser();
-        int result = noteMapper.deleteNote(user.getUserId(),noteTitle);
+        int result = noteMapper.deleteNote(user.getUserId(),noteId);
         if(result == 1){
             model.addAttribute("successMessage",
-                    "Note successfully deleted " + noteTitle + "!");
+                    "Note successfully deleted " + noteId + "!");
         }else {
             model.addAttribute("errorMessage",
-                    "Error during delete note with " + noteTitle + "!");
+                    "Error during delete note with " + noteId + "!");
         }
         return "result";
     }

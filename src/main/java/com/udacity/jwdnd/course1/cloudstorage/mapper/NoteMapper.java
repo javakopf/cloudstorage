@@ -42,8 +42,8 @@ public interface NoteMapper {
     })
     Note loadNoteById(Integer noteId);
 
-    @Delete("DELETE NOTES WHERE userid = #{userId} and notetitle = #{noteTitle}")
-    int deleteNote(Integer userId , String noteTitle);
+    @Delete("DELETE NOTES WHERE userid = #{userId} and noteid = #{noteId}")
+    int deleteNote(Integer noteId, Integer userId);
 
     @Update("UPDATE NOTES SET notetitle = #{noteTitle} ,notedescription = #{noteDescription} WHERE noteid = #{noteId}")
     int updateNote(Note note);
